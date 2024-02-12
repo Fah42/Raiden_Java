@@ -1,17 +1,21 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 public class Game {
     Player player;
     List<Enemy> enemies = new ArrayList<>();
     List<Projectile> projectiles = new ArrayList<>();
     InputHandler inputHandler;
+    Update updateGame;
+    DrawGame drawGame;
 
     public Game() {
-        player = new Player(10, 10); // Position initiale du joueur
-        enemies.add(new Enemy(5, 5)); // Ajouter des ennemis
-        enemies.add(new Enemy(15, 5));
+        player = new Player(2, 5); // Position initiale du joueur
+        enemies.add(new Enemy(69, 13)); // Ajouter des ennemis
+        enemies.add(new Enemy(69, 23));
         inputHandler = new InputHandler(player, projectiles); // Initialiser InputHandler
-        updateGame = new UpdateGame();
+        updateGame = new Update();
+        drawGame = new DrawGame(player, enemies, projectiles);
     }
 
     public void start() {
@@ -22,18 +26,15 @@ public class Game {
         inputThread.start(); // Démarrer le thread d'entrée
 
         while (true) { // Boucle principale du jeu
-            updateGame(); // Met à jour l'état du jeu
-            drawGame(); // Dessine l'état actuel du jeu dans le terminal
+            
+            //updateGame.gameUpdate(); // Met à jour l'état du jeu
+            drawGame.drawGame(); // Dessine l'état actuel du jeu dans le terminal
 
             try {
-                Thread.sleep(100); // Pause pour contrôler la vitesse de la boucle de jeu
+                Thread.sleep(1000); // Pause pour contrôler la vitesse de la boucle de jeu
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-    }
-
-    private void drawGame() {
-        // Logique de dessin du jeu
     }
 }

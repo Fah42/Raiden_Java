@@ -5,11 +5,11 @@ public class Player {
         this.y = startY;
     }
 
-    public void moveLeft() {
-        x--;
+    public void moveUp() {
+        y--;
     }
 
-    public void moveRight() {
-        x++;
+    public void moveDown() {
+        y++;
     }
 }
