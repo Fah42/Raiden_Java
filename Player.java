@@ -23,4 +23,7 @@ public class Player {
         this.currentInput = currentInput;
     }
 
+    public void clearCurrentInput() {
+        this.currentInput = null; 
+    }
 }

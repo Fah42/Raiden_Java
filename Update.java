@@ -1,17 +1,15 @@
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-
 public class Update {
     Player player;
     DrawGame drawGame;
     List<Enemy> enemies;
     List<Projectile> projectiles;
 
-    public Update(Player player, List<Enemy> enemies, List<Projectile> projectiles) {
+    public Update(Player player, List<Enemy> enemies, List<Projectile> projectiles, DrawGame drawGame) {
         this.player = player;
         this.enemies = enemies;
         this.projectiles = projectiles;
+        this.drawGame = drawGame;
     }
 
     public Update() {
@@ -39,6 +37,8 @@ public class Update {
         } else if ("s".equals(input) && player.y < drawGame.gameWidth - 1) {
             player.moveDown(); // Déplace le joueur bas si possible
         }
+
+        player.clearCurrentInput();
     }
 
     private void updateEnemies() {

@@ -13,9 +13,9 @@ public class Game {
         player = new Player(2, 5); // Position initiale du joueur
         enemies.add(new Enemy(69, 13)); // Ajouter des ennemis
         enemies.add(new Enemy(69, 23));
-        inputHandler = new InputHandler(player, projectiles); // Initialiser InputHandler
-        updateGame = new Update();
         drawGame = new DrawGame(player, enemies, projectiles);
+        inputHandler = new InputHandler(player, projectiles); // Initialiser InputHandler
+        updateGame = new Update(player, enemies, projectiles, drawGame);
     }
 
     public void start() {
@@ -26,8 +26,7 @@ public class Game {
         inputThread.start(); // Démarrer le thread d'entrée
 
         while (true) { // Boucle principale du jeu
-            
-            //updateGame.gameUpdate(); // Met à jour l'état du jeu
+            updateGame.gameUpdate(); // Met à jour l'état du jeu
             drawGame.drawGame(); // Dessine l'état actuel du jeu dans le terminal
 
             try {
