@@ -11,14 +11,17 @@ public class Game {
         enemies.add(new Enemy(5, 5)); // Ajouter des ennemis
         enemies.add(new Enemy(15, 5));
         inputHandler = new InputHandler(player, projectiles); // Initialiser InputHandler
+        updateGame = new UpdateGame();
     }
 
     public void start() {
+        /*
+         * Utilisation d'une expression lambda (fonction anonyme) -> qui permet d'eviter la creation d'une classe pour l'excution de handleInput
+         */
         Thread inputThread = new Thread(() -> inputHandler.handleInput()); // Créer un thread pour gérer les entrées
         inputThread.start(); // Démarrer le thread d'entrée
 
         while (true) { // Boucle principale du jeu
-            inputHandler.handleInput(); // Verifie l'input du joueur;
             updateGame(); // Met à jour l'état du jeu
             drawGame(); // Dessine l'état actuel du jeu dans le terminal
 
@@ -28,10 +31,6 @@ public class Game {
                 e.printStackTrace();
             }
         }
-    }
-
-    private void updateGame() {
-        // Logique de mise à jour du jeu
     }
 
     private void drawGame() {
