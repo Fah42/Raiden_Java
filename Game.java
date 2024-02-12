@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+
 public class Game {
     Player player;
     List<Enemy> enemies = new ArrayList<>();
