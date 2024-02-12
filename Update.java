@@ -31,7 +31,9 @@ public class Update {
         checkCollisions();
     }
 
-    private void updatePlayer(String input) {
+    private void updatePlayer() {
+        String input = player.getCurrentInput();
+
         if ("w".equals(input) && player.y > 0) {
             player.moveUp(); // Déplace le joueur en haut si possible
         } else if ("s".equals(input) && player.y < drawGame.gameWidth - 1) {
