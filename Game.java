@@ -1,36 +1,29 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-
 public class Game {
     Player player;
     List<Enemy> enemies = new ArrayList<>();
     List<Projectile> projectiles = new ArrayList<>();
+    InputHandler inputHandler;
 
     public Game() {
-        player = new Player(10, 10);
-        enemies.add(new Enemy(5, 5));
+        player = new Player(10, 10); // Position initiale du joueur
+        enemies.add(new Enemy(5, 5)); // Ajouter des ennemis
         enemies.add(new Enemy(15, 5));
+        inputHandler = new InputHandler(player, projectiles); // Initialiser InputHandler
     }
 
     public void start() {
-        Scanner scanner = new Scanner(System.in);
-        while(true) {
-            if (scanner.hasNextLine()) {
-                if ("left".equals(input)) {
-                    player.moveLeft();
-                } else if ("right".equals(inputs)) {
-                    player.moveRight();
-                } else if ("shoot".equals(input)) {
-                    projectiles.add(new Projectile(player.x, player.y));
-                }
-            }
-            
-            updateGame();
-            drawGame();
+        Thread inputThread = new Thread(() -> inputHandler.handleInput()); // Créer un thread pour gérer les entrées
+        inputThread.start(); // Démarrer le thread d'entrée
+
+        while (true) { // Boucle principale du jeu
+            inputHandler.handleInput(); // Verifie l'input du joueur;
+            updateGame(); // Met à jour l'état du jeu
+            drawGame(); // Dessine l'état actuel du jeu dans le terminal
 
             try {
-                Thread.sleep(100);
+                Thread.sleep(100); // Pause pour contrôler la vitesse de la boucle de jeu
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -38,10 +31,10 @@ public class Game {
     }
 
     private void updateGame() {
-        // a faire
+        // Logique de mise à jour du jeu
     }
 
     private void drawGame() {
-        // a faire
+        // Logique de dessin du jeu
     }
 }
